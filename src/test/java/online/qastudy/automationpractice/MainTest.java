@@ -19,7 +19,6 @@ public class MainTest {
 
     @BeforeTest
     public void setUp() {
-        // Установка пути к драйверу браузера (в данном случае Chrome)
         System.setProperty("webdriver.chrome.driver", "C:\\TOOLS\\DRIVERS\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("https://automationexercise.com/");
