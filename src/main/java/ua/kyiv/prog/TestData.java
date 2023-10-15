@@ -1,9 +1,7 @@
 package ua.kyiv.prog;
 
-import org.openqa.selenium.support.ui.Select;
-
 public class TestData {
-    private String email = "example+115@example.com";
+    private String email = "example+116@example.com";
     private String firstName = "Pep";
     private String lastName = "Linders";
     private String password = "P@ssw0rd";
@@ -19,10 +17,25 @@ public class TestData {
     private String state = "AnyState";
     private String city = "AnyCity";
     private String quantity = "3";
+    private String notExpectedText = "ENTER ACCOUNT INFORMATION";
+    private String currencyAmount = "100";
+    private String ProductSearchText = "Кавомашина Saeco";
+    private static int currencyAmountExpectedValue = (int) 846.62;
 
 
 
     public String getQuantity() {return quantity;}
+
+    public String getProductSearchText() {return ProductSearchText;}
+
+    public static int getCurrencyAmountExpectedValue() {return currencyAmountExpectedValue;}
+
+    public String getCurrencyAmount() {return currencyAmount;}
+
+    public String getnotExpectedText() {
+        return notExpectedText;
+    }
+
     public String getEmail() {return email;}
 
     public String getFirstName() {

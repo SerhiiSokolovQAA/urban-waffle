@@ -1,19 +1,12 @@
 package ua.kyiv.prog;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SignInPage {
 
-    private WebDriver driver;
+    private static WebDriver driver;
 
     public SignInPage(WebDriver driver) {
         this.driver = driver;
@@ -39,7 +32,45 @@ public class SignInPage {
         WebElement passwordInput = driver.findElement(By.xpath("//*[@id=\"password\"]"));
         passwordInput.sendKeys(password);
     }
-
+public String getResultForPLN() {
+    JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+    String script = "return document.evaluate('/html/body/div[3]/div[3]/div/div[1]/div[2]/div[1]/div/table/tbody/tr[3]/td[1]/span/span[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+    WebElement resultElement = (WebElement) jsExecutor.executeScript(script);
+    String valueOnWebsite = resultElement.getText();
+    return valueOnWebsite;
+}
+    public int manipulateAndMultiplyResultForPLN() {
+        String textValue = getResultForPLN();
+        double numericValue = Double.parseDouble(textValue);
+        double result = numericValue * 100;
+        return  (int) result;
+    }
+    public String getResultForUSD() {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        String script = "return document.evaluate('/html/body/div[3]/div[3]/div/div[1]/div[2]/div[1]/div/table/tbody/tr[1]/td[1]/span/span[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+        WebElement resultElement = (WebElement) jsExecutor.executeScript(script);
+        String valueOnWebsite = resultElement.getText();
+        return valueOnWebsite;
+    }
+    public int manipulateAndMultiplyResultForUSD() {
+        String textValue = getResultForUSD();
+        double numericValue = Double.parseDouble(textValue);
+        double result = numericValue * 100;
+        return  (int) result;
+    }
+    public String getResultForUER() {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        String script = "return document.evaluate('/html/body/div[3]/div[3]/div/div[1]/div[2]/div[1]/div/table/tbody/tr[2]/td[1]/span/span[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;";
+        WebElement resultElement = (WebElement) jsExecutor.executeScript(script);
+        String valueOnWebsite = resultElement.getText();
+        return valueOnWebsite;
+    }
+    public int manipulateAndMultiplyResultForEUR() {
+        String textValue = getResultForUER();
+        double numericValue = Double.parseDouble(textValue);
+        double result = numericValue * 100;
+        return  (int) result;
+    }
     public void enterFirstName(String firstname) {
         WebElement firstnameInput = driver.findElement(By.xpath("//*[@id=\"first_name\"]"));
         firstnameInput.sendKeys(firstname);
@@ -127,7 +158,6 @@ public class SignInPage {
         WebElement dressesButton = driver.findElement(By.xpath("//*[@id=\"Women\"]/div/ul/li[1]/a"));
         dressesButton.click();
     }
-
     public void clickViewProduct() throws InterruptedException {
         Thread.sleep(2000);
         WebElement viewProduct = driver.findElement(By.xpath("/html/body/section/div/div[2]/div[2]/div/div[2]/div/div[2]/ul/li/a"));
@@ -135,7 +165,6 @@ public class SignInPage {
         driver.switchTo().defaultContent();
         viewProduct.click();
     }
-
     public void clickViewProductNew() throws InterruptedException {
         Thread.sleep(2000);
         WebElement viewProductNew = driver.findElement(By.xpath("/html/body/section/div/div[2]/div[2]/div/div[3]/div/div[2]/ul/li/a"));
@@ -143,20 +172,17 @@ public class SignInPage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", viewProduct);
         viewProductNew.click();
     }
-
     public void clickViewCart() throws InterruptedException {
         Thread.sleep(2000);
         WebElement viewcart = driver.findElement(By.xpath("//*[@id=\"cartModal\"]/div/div/div[2]/p[2]/a/u"));
         viewcart.click();
     }
-
     public void enterQuantity(String quantity) throws InterruptedException {
         Thread.sleep(2000);
         WebElement textField = driver.findElement(By.xpath("//*[@id='quantity']"));
         textField.clear();
         textField.sendKeys(quantity);
     }
-
     public void clickContinueShopping() throws InterruptedException {
         Thread.sleep(2000);
         WebElement continueShopping = driver.findElement(By.xpath("//*[@id=\"cartModal\"]//div[3]/button"));
@@ -167,7 +193,6 @@ public class SignInPage {
         WebElement addToCart = driver.findElement(By.xpath("/html/body/section/div/div/div[2]/div[2]/div[2]/div/span/button"));
         addToCart.click();
     }
-
     public String getTotalPriceForFirstItemInCart() {
         WebElement totalPriceElement = driver.findElement(By.xpath("//*[@id=\"product-3\"]/td[5]/p"));
         return totalPriceElement.getText();
@@ -176,7 +201,9 @@ public class SignInPage {
         WebElement totalPriceElement = driver.findElement(By.xpath("//*[@id=\"product-4\"]/td[5]/p"));
         return totalPriceElement.getText();
     }
-
+    public String getPageSource() {
+        return driver.getPageSource();
+    }
     public class CreateAccountPage {
         private WebDriver driver;
 
@@ -189,18 +216,12 @@ public class SignInPage {
 
         public void clickRegister() {
         }
-
         public String getValidationMessage() throws InterruptedException {
             Thread.sleep(2000);
             String validationMessage = driver.getPageSource();
+            String searchText = "Please fill out this field.";
             return validationMessage;
+
         }
-
-//    public String getValidationMessage() throws InterruptedException {
-        //Thread.sleep(2000);
-        //String validationMessage = driver.getPageSource();
-        //String searchText = "Please fill out this field.";
-        //return validationMessage;
-
     }
 }
