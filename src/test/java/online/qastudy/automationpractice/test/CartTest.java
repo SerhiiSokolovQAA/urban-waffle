@@ -1,44 +1,24 @@
-package online.qastudy.automationpractice;
+package online.qastudy.automationpractice.test;
 
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import ua.kyiv.prog.HomePage;
-import ua.kyiv.prog.SignInPage;
-import ua.kyiv.prog.TestData;
+import ua.kyiv.prog.automationexperience.AutomationSetUp;
+import ua.kyiv.prog.automationexperience.SignInPage;
 
-public class CartTest {
-    private WebDriver driver;
-    private WebDriverWait wait;
-    private TestData testData;
-
-    @BeforeClass
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "C:\\TOOLS\\DRIVERS\\chromedriver.exe");
-        driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, 10);
-        testData = new TestData();
-
-    }
+public class CartTest extends AutomationSetUp {
 
     @Test
     public void testCartTest() throws InterruptedException {
-        driver.get("http://automationexercise.com/");
-        driver.manage().window().maximize();
-        HomePage homePage = new HomePage(driver);
-        SignInPage signInPage = homePage.clickWomenButton();
-
+        SignInPage signInPage = new SignInPage(this.driver);
+        signInPage.clickWomenButton();
+        signInPage.clickWomenButton();
         signInPage.clickDressesButton();
         signInPage.clickViewProduct();
         signInPage.enterQuantity(testData.getQuantity());
         signInPage.clickAddToCart();
         signInPage.clickContinueShopping();
-        homePage.clickWomenButton();
+        signInPage.clickWomenButton();
         signInPage.clickDressesButton();
         signInPage.clickViewProductNew();
         signInPage.enterQuantity("2");
@@ -50,9 +30,5 @@ public class CartTest {
         String actualResultForSecondItemInTheCart = signInPage.getTotalPriceForFirstItemInCart();
         String expectedResultForSecondItemInTheCart = "Rs. 3000";
         Assert.assertEquals(expectedResultForSecondItemInTheCart, actualResultForSecondItemInTheCart);
-    }
-    @AfterClass
-    public void tearDown() {
-        driver.quit();
     }
 }

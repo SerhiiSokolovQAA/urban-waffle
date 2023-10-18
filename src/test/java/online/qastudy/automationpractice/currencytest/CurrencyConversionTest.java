@@ -1,9 +1,9 @@
-package online.qastudy.automationpractice;
+package online.qastudy.automationpractice.currencytest;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import ua.kyiv.prog.CurrencyConversionTestSetup;
-import ua.kyiv.prog.CurrencyConverterPage;
+import ua.kyiv.prog.currency.CurrencyConversionTestSetup;
+import ua.kyiv.prog.currency.CurrencyConverterPage;
 
 
 public class CurrencyConversionTest extends CurrencyConversionTestSetup {

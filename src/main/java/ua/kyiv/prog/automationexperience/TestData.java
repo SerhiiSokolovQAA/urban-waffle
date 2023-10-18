@@ -1,7 +1,24 @@
-package ua.kyiv.prog;
+package ua.kyiv.prog.automationexperience;
+
+import java.util.Random;
+
+
+
 
 public class TestData {
-    private String email = "example+116@example.com";
+    public static void main(String[] args) {
+        String email = "example+";
+        Random random = new Random();
+
+
+        int randomNumber = 10000 + random.nextInt(90000);
+
+        email += randomNumber + "@example.com";
+    }
+
+
+
+    private String email = "example+" + (int) (Math.random() * 100000) + "@example.com";
     private String firstName = "Pep";
     private String lastName = "Linders";
     private String password = "P@ssw0rd";

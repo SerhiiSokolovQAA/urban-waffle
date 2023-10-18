@@ -1,7 +1,8 @@
-package online.qastudy.automationpractice;
+package online.qastudy.automationpractice.rozetkatest;
 
 import org.testng.annotations.Test;
-import ua.kyiv.prog.*;
+import ua.kyiv.prog.rozetka.RozetkaProductSearchTestData;
+import ua.kyiv.prog.rozetka.RozetkaSetUp;
 
 public class RozetkaTest extends RozetkaSetUp {
     private RozetkaProductSearchTestData rozetkaProductSearchTestData;

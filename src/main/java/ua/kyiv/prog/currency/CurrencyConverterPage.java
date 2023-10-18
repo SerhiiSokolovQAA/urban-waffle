@@ -1,4 +1,4 @@
-package ua.kyiv.prog;
+package ua.kyiv.prog.currency;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;

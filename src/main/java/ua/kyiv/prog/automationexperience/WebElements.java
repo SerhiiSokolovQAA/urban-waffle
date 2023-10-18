@@ -1,4 +1,4 @@
-package ua.kyiv.prog;
+package ua.kyiv.prog.automationexperience;
 
 
 

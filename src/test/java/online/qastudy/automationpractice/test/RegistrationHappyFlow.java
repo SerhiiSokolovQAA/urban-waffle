@@ -1,38 +1,18 @@
-package online.qastudy.automationpractice;
+package online.qastudy.automationpractice.test;
 
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import ua.kyiv.prog.HomePage;
-import ua.kyiv.prog.SignInPage;
-import ua.kyiv.prog.TestData;
+import ua.kyiv.prog.automationexperience.AutomationSetUp;
+import ua.kyiv.prog.automationexperience.SignInPage;
 
-public class RegistrationHappyFlow {
-    private WebDriver driver;
-    private WebDriverWait wait;
-    private TestData testData;
 
-    @BeforeClass
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "C:\\TOOLS\\DRIVERS\\chromedriver.exe");
-        driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, 10);
-        testData = new TestData();
-
-    }
+public class RegistrationHappyFlow extends AutomationSetUp {
 
     @Test
     public void testRegistration() throws InterruptedException {
-        driver.get("http://automationexercise.com/");
-        driver.manage().window().maximize();
-        HomePage homePage = new HomePage(driver);
-        SignInPage signInPage = homePage.clickSignIn();
-
+        SignInPage signInPage = new SignInPage(this.driver);
+        signInPage.clickSignIn();
         signInPage.enterEmail(testData.getEmail());
         signInPage.enterAlias(testData.getAlias());
         SignInPage.CreateAccountPage createAccountPage = signInPage.clicksignup();
@@ -55,10 +35,5 @@ public class RegistrationHappyFlow {
 
         String validationMessage = createAccountPage.getValidationMessage();
         Assert.assertTrue(validationMessage.contains(validationMessage), "Your new account has been successfully created!");
-    }
-
-    @AfterClass
-    public void tearDown() {
-        driver.quit();
     }
 }
