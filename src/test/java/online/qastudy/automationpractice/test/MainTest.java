@@ -1,4 +1,4 @@
-package online.qastudy.automationpractice;
+package online.qastudy.automationpractice.test;
 
 
 import org.openqa.selenium.By;
@@ -12,23 +12,15 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import ua.kyiv.prog.automationexperience.AutomationSetUp;
 
 
-public class MainTest {
-    private WebDriver driver;
-
-    @BeforeTest
-    public void setUp() {
-        // Установка пути к драйверу браузера (в данном случае Chrome)
-        System.setProperty("webdriver.chrome.driver", "C:\\TOOLS\\DRIVERS\\chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.get("https://automationexercise.com/");
-    }
+public class MainTest extends AutomationSetUp {
 
     @Test
     public void testElementPresence() {
         // Ищем элемент на странице
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(this.driver, 10);
         WebElement homeButton =  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='fa fa-home']")));
         WebElement productsButton =  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='material-icons card_travel']")));
         WebElement cartButton =  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='header']//*[@href='/view_cart']")));
@@ -57,10 +49,5 @@ public class MainTest {
         Assert.assertNotNull(categorywomenButton, "Элемент не найден на странице");
         Assert.assertNotNull(categorymenButton, "Элемент не найден на странице");
         Assert.assertNotNull(categorykidsButton, "Элемент не найден на странице");
-    }
-
-    @AfterTest
-    public void tearDown() {
-        driver.quit();
     }
 }

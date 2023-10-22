@@ -1,4 +1,4 @@
-package online.qastudy.automationpractice;
+package ua.kyiv.prog.automationexperience;
 
 
 
